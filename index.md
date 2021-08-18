@@ -1,6 +1,5 @@
 # Enhancing the Plotting Functionality in MCnet/Rivet
-### Google Summer of Code 2021 Final Report
-### Simon Thor
+### Google Summer of Code 2021 Final Report - Simon Thor
 
 # Overview
 ## Introduction
