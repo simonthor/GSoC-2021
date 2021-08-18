@@ -1,4 +1,3 @@
-# GSoC Final Report 2021
 ## Fonts
 I also identified which font is being used by the old plotting backend and identified how to configure matplotlib to use the same font. Specifically, for regular text, the `URW Palladio L` font is used, while for mathematical expressions, the `PazoMath` font is used. 
 
