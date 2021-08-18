@@ -133,7 +133,7 @@ Parts of the core plotting code will be moved to the YODA package, a histogrammi
 
 ## Added features
 The yoda plotting API for 2D histograms currently consists of the functions `heatmap`, `ratio_heatmap`, `surface`, `ratio_surface`.
-A tutorial for the 2D YODA plotting API can be found in this [jupyter notebook](https://gitlab.com/hepcedar/rivet/-/blob/matplotlib-GSoC/mpl-plotting/documentation-Simon/yoda_plot2d_demo.ipynb) 
+A tutorial for the 2D YODA plotting API can be found in this [jupyter notebook](yoda_plot2d_demo.ipynb) 
 <!--TODO change link to website or doc repo. Also update link once it has been placed in a correct location-->
 
 ## Remaining Issues
