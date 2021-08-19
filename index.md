@@ -119,8 +119,11 @@ I also added support for surface plots, which is an alternative to heatmaps. An 
 
 Furthermore, all the generated subplots (in the case of the figures above, there are 5 subplots) can be saved as either one image file (as in the case above) or as separate files. 
 
+I also added tests to the code using the `pytest` package.
+
 ## Remaining issues
 - The main 2D histogram plotting function in Rivet, `plot_2Dhist`, should be refactored, as there is some code repetition.
+- More tests can be added, as the coverage is currently quite low. Testing the images using `pytest-mpl` would also be beneficial.
 
 ## Merge status
 These changes are currently in the [matplotlib-GSoC](https://gitlab.com/hepcedar/rivet/-/tree/matplotlib-GSoC/) branch and will be merged into the main branch once the new plotting backend can fully replace the current plotting backend.
