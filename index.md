@@ -18,7 +18,7 @@ The main tasks I worked on can be separated into 4 parts:
 
 These tasks are described in further detail below. Additionally, I made minor contributions not directly related to the main tasks, which are listed under "Other contributions".
 
-In total, I made over 140 commits to Rivet. Most of these commits were made to the [matplotlib-GSoC](https://gitlab.com/hepcedar/rivet/-/commits/matplotlib-GSoC?author=Simon%20Thor), while some were made directly to the [main branch](https://gitlab.com/hepcedar/rivet/-/commits/matplotlib-GSoC?author=Simon%20Thor). The hyperlinks link to a list of all commits I made to each branch, of which all commits made up until 20th August 2021 are part of GSoC 2021.
+In total, I made over 140 commits to Rivet. Most of these commits were made to the [matplotlib-GSoC](https://gitlab.com/hepcedar/rivet/-/commits/matplotlib-GSoC?author=Simon%20Thor), while some were made directly to the [main branch](https://gitlab.com/hepcedar/rivet/-/commits/release-3-1-x?author=Simon%20Thor). The hyperlinks link to a list of all commits I made to each branch, of which all commits made up until 20th August 2021 are part of GSoC 2021.
 <!--TODO update this link to only target the main branch once the matplotlib code has been merged.-->
 
 # Mathtext Compatibility
@@ -42,17 +42,16 @@ Since the plotting backend will be changed from LaTeX to matplotlib, one of the 
 ## Remaining issues
 - `\text` cannot always be replaced by `\mathrn`, as e.g., “-” in math mode is longer than in plaintext.
 - `\micro` in LaTeX will give the same output as `$\mathrm{\mu}$` in mathtext. However, `$\mathrm{\mu}$` in LaTeX will give a [non-sensical output](https://tex.stackexchange.com/questions/569676/applying-mathrm-on-mu-leads-to-strange-symbol). This can therefore not be changed until the backend has been switched completely to mathtext.
-- `\large` has no equivalent command in mathtext. Instead, one must pass a `fontsize` parameter to matplotlib. The best equivance for this in matplotlib is to change the rcParams for e.g. the font size of the axis labels or the title.
-- `Madgraph_aMCatNLO` (which is found in [3 files](https://gitlab.com/search?search=madgraph_a&group_id=6283098&project_id=15397086&scope=&search_code=true&snippets=false&repository_ref=release-3-1-x&nav_source=navbar)) will be parsed by mathtext as plaintext and will therefore be rendered correctly (with a literal underscore) but will raise an error in LaTeX.
 
 ## Merge status
 All mathtext-related contributions I made, besides the code for the mathtext preprocessor, have been merged into the main repository. The related merge requests are:
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/293 
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/295 
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/303 
+
 The code for the mathtext preprocessor is in [mathtext_preprocessor.py](https://gitlab.com/hepcedar/rivet/-/blob/matplotlib-GSoC/mpl-plotting/mathtext_preprocessor.py) in the matplotlib-GSoC branch. This file should be moved to the [pyext/rivet/](https://gitlab.com/hepcedar/rivet/-/tree/release-3-1-x/pyext/rivet) directory when merging matplotlib-GSoC into the main branch.
 
-# Rewriting `rivet-cmphistos`
+# Rewriting rivet-cmphistos
 `rivet-cmphistos` is a command used in Rivet to create the intermediate format for the plotting files.
 The functionality of `rivet-cmphistos` (and its successor, `rivet-mkdat`) is described in the figure below:
 
@@ -60,8 +59,8 @@ The functionality of `rivet-cmphistos` (and its successor, `rivet-mkdat`) is des
 
 The command can be called via the command line with the syntax `rivet-cmphistos file1.yoda file2.yoda`... . Here, file1.yoda, file2.yoda etc are yoda files containing histograms, each histogram with an ID corresponding to an analysis in Rivet. `rivet-cmphistos` will then create an intermediate .dat file for each ID, which includes all the data and style settings for the plot. This .dat file can then be plotted by `rivet-plot`, which is explained later.
 
-To use the new backend, the inputs for `rivet-cmphistos` need to be changed, as new plot configurations were added while others were removed. This required a complete rewrite of the code behind the command, especially since the syntax for the intermediate format and .plot files were changed from a custom syntax to YAML syntax, to make the files more readable.
-The new structure for the .plot files and .dat files were developed during the project and are explained in detail in [its documentation]() <!--TODO write this documentation-->
+To use the new backend, the inputs for `rivet-cmphistos` needed to be changed, as new plot configurations were added while others were removed. This required a complete rewrite of the code behind the command, especially since the syntax for the intermediate format and .plot files were changed from a custom syntax to YAML syntax, to make the files more readable.
+The new structure for the .plot files and .dat files were developed during the project and are explained in detail in [its documentation](https://gitlab.com/hepcedar/rivet/-/blob/yaml-docs/mpl-plotting/documentation-Simon/plot-dat-files.md). <!--TODO Link to correct branch-->
 
 ## Fixed issues and new features
 - Rewrite most of the code inside `rivet-cmphistos` and renaming it to `rivet-mkdat` to make it work for YAML syntax files. `rivet-cmphistos` was also a script with unstructured code, while the new code is more modular and is structured as an API with documentation for all functions.
@@ -113,7 +112,7 @@ The plotting code was separated into two parts:
 - A general plotting API which can be used to easily plot 2D histograms. By default, this API does not do any styling of the plot but can be used to further customize the look of the plots.
 - A Rivet-specific API which uses the general plotting code and applies Rivet-specific styling to the plots.
 
-For the general plotting API, I created 4 plotting functions: `heatmap`, `ratio_heatmap`, `surface`, and `ratio_surface`, as well as the `format_axis` function which can be used for styling. A tutorial for the general 2D histogram plotting API can be found in this [jupyter notebook](yoda_plot2d_demo.ipynb).
+For the general plotting API, I created 4 plotting functions: `heatmap`, `ratio_heatmap`, `surface`, and `ratio_surface`, as well as the `format_axis` function which can be used for styling. A tutorial for the general 2D histogram plotting API can be found in this [jupyter notebook](https://github.com/simonthor/GSoC-2021/blob/gh-pages/yoda_plot2d_demo.ipynb). <!-- TODO link to better more up to date version once it exists -->
 
 The Rivet-specific API allows users to plot 2D histograms with these 4 plotting functions. The image below shows an example output of the Rivet 2D histogram plotter. The top row contains 2D histograms while the bottom row contains the ratio between the corresponding histogram in the same column and the leftmost 2D histogram in the top row (in this case it is called "Data"), which act as the reference.
 
@@ -153,8 +152,14 @@ Currently, [manual configurations of the fonts](https://gitlab.com/hepcedar/rive
 - [Where to put the mplstyle file so that matplotlib can find it](https://matplotlib.org/stable/tutorials/introductory/customizing.html#defining-your-own-style)
 - [How to make matplotlib find fonts installed in a custom location](https://stackoverflow.com/a/43647344/11841986)
 
+## Miscellaneous
 Additional issues and merge requests I have contributed to during GSoC:
 - https://gitlab.com/hepcedar/rivet/-/issues/233 
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/322 
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/307 
 - https://gitlab.com/hepcedar/rivet/-/merge_requests/318 
+
+# Conclusions
+In conclusion, Google Summer of Code was a valuable experience for me. I learned how to use `git` in a collaborative environment, how to use advanced matplotlib, learning which types of software is used by particle physicists, as well as how to collaborate on an open-source project.
+
+I would like to thank my mentors Andy Buckley and Christian Bierlich, who both have been supportive during the entirety of the program and tirelessly answered all my questions. I would also like to thank Matthew Filipovich, who I have worked with during this program and who I could discuss implementation ideas with.
