@@ -60,7 +60,7 @@ The functionality of `rivet-cmphistos` (and its successor, `rivet-mkdat`) is des
 The command can be called via the command line with the syntax `rivet-cmphistos file1.yoda file2.yoda`... . Here, file1.yoda, file2.yoda etc are yoda files containing histograms, each histogram with an ID corresponding to an analysis in Rivet. `rivet-cmphistos` will then create an intermediate .dat file for each ID, which includes all the data and style settings for the plot. This .dat file can then be plotted by `rivet-plot`, which is explained later.
 
 To use the new backend, the inputs for `rivet-cmphistos` needed to be changed, as new plot configurations were added while others were removed. This required a complete rewrite of the code behind the command, especially since the syntax for the intermediate format and .plot files were changed from a custom syntax to YAML syntax, to make the files more readable.
-The new structure for the .plot files and .dat files were developed during the project and are explained in detail in [its documentation](https://gitlab.com/hepcedar/rivet/-/blob/yaml-docs/mpl-plotting/documentation-Simon/plot-dat-files.md). <!--TODO Link to correct branch-->
+The new structure for the .plot files and .dat files were developed during the project and are explained in detail in [its documentation](https://gitlab.com/hepcedar/rivet/-/blob/matplotlib-GSoC/mpl-plotting/documentation-Simon/plot-dat-files.md).
 
 ## Fixed issues and new features
 - Rewrite most of the code inside `rivet-cmphistos` and renaming it to `rivet-mkdat` to make it work for YAML syntax files. `rivet-cmphistos` was also a script with unstructured code, while the new code is more modular and is structured as an API with documentation for all functions.
